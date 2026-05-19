@@ -1,0 +1,175 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Patient Class
+class Patient
+{
+private:
+    int patientID;
+    string name;
+    int age;
+    string disease;
+
+public:
+    void addPatient()
+    {
+        cout << "\nEnter Patient ID: ";
+        cin >> patientID;
+
+        cin.ignore();
+
+        cout << "Enter Patient Name: ";
+        getline(cin, name);
+
+        cout << "Enter Patient Age: ";
+        cin >> age;
+
+        cin.ignore();
+
+        cout << "Enter Disease: ";
+        getline(cin, disease);
+    }
+
+    void displayPatient()
+    {
+        cout << "\n----- Patient Record -----" << endl;
+        cout << "Patient ID: " << patientID << endl;
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Disease: " << disease << endl;
+    }
+};
+
+// Doctor Class
+class Doctor
+{
+private:
+    int doctorID;
+    string doctorName;
+    string specialization;
+
+public:
+    void addDoctor()
+    {
+        cout << "\nEnter Doctor ID: ";
+        cin >> doctorID;
+
+        cin.ignore();
+
+        cout << "Enter Doctor Name: ";
+        getline(cin, doctorName);
+
+        cout << "Enter Specialization: ";
+        getline(cin, specialization);
+    }
+
+    void displayDoctor()
+    {
+        cout << "\n----- Doctor Record -----" << endl;
+        cout << "Doctor ID: " << doctorID << endl;
+        cout << "Doctor Name: " << doctorName << endl;
+        cout << "Specialization: " << specialization << endl;
+    }
+};
+
+// Billing Class
+class Billing
+{
+private:
+    float charges;
+
+public:
+    void generateBill()
+    {
+        cout << "\nEnter Treatment Charges: ";
+        cin >> charges;
+
+        cout << "Total Bill: " << charges << " PKR" << endl;
+    }
+};
+
+// Main Function
+int main()
+{
+    Patient patients[100];
+    Doctor doctors[50];
+    Billing bill;
+
+    int patientCount = 0;
+    int doctorCount = 0;
+
+    int choice;
+
+    do
+    {
+        cout << "   HOSPITAL MANAGEMENT SYSTEM" << endl;
+
+        cout << "1. Add Patient" << endl;
+        cout << "2. Display Patients" << endl;
+        cout << "3. Add Doctor" << endl;
+        cout << "4. Display Doctors" << endl;
+        cout << "5. Generate Bill" << endl;
+        cout << "6. Exit" << endl;
+
+        cout << "\nEnter Your Choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            patients[patientCount].addPatient();
+            patientCount++;
+            cout << "\nPatient Added Successfully!" << endl;
+            break;
+
+        case 2:
+            if (patientCount == 0)
+            {
+                cout << "\nNo Patient Records Found!" << endl;
+            }
+            else
+            {
+                for (int i = 0; i < patientCount; i++)
+                {
+                    patients[i].displayPatient();
+                }
+            }
+            break;
+
+        case 3:
+            doctors[doctorCount].addDoctor();
+            doctorCount++;
+            cout << "\nDoctor Added Successfully!" << endl;
+            break;
+
+        case 4:
+            if (doctorCount == 0)
+            {
+                cout << "\nNo Doctor Records Found!" << endl;
+            }
+            else
+            {
+                for (int i = 0; i < doctorCount; i++)
+                {
+                    doctors[i].displayDoctor();
+                }
+            }
+            break;
+
+        case 5:
+            bill.generateBill();
+            break;
+
+        case 6:
+            cout << "\nExiting Program..." << endl;
+            break;
+
+        default:
+            cout << "\nInvalid Choice!" << endl;
+        }
+
+    } while (choice != 6);
+
+    return 0;
+}
